@@ -106,14 +106,14 @@ static inline uint32_t fast_strtoul16(const char *str, const char **endptr) {
 // end shamelessly ripped from pixelnuke
 
 static void net_send(px_client_t * client, char * str) {
-	send(client->socket, str, strlen(str), 0);
-	send(client->socket, "\n", 1, 0);
+	send(client->socket, str, strlen(str), MSG_NOSIGNAL);
+	send(client->socket, "\n", 1, MSG_NOSIGNAL);
 }
 
 static void net_err(px_client_t * client, char * str) {
-	send(client->socket, "ERROR: ", 7, 0);
-	send(client->socket, str, strlen(str), 0);
-	send(client->socket, "\n", 1, 0);
+	send(client->socket, "ERROR: ", 7, MSG_NOSIGNAL);
+	send(client->socket, str, strlen(str), MSG_NOSIGNAL);
+	send(client->socket, "\n", 1, MSG_NOSIGNAL);
 }
 
 static void poke_main_thread(void) {
